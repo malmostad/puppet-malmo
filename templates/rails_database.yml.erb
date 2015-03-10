@@ -1,0 +1,23 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  collation: utf8_swedish_ci
+  host: localhost
+  pool: 20
+  username: <%= @db['user'] %>
+  password: <%= @db['password'] %>
+
+<% if @db['create_test'] -%>
+development:
+  <<: *default
+  database: <%= @app_name %>
+
+test:
+  <<: *default
+  database: <%= @app_name %>_test
+<% else -%>
+
+production:
+  <<: *default
+  database: <%= @app_name %>
+<% end -%>

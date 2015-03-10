@@ -1,4 +1,4 @@
-class mcommons::ruby::rails {
+class mcommons::ruby::rails() {
 
   file { "database":
     path    => "${::app_home}/config/database.yml",

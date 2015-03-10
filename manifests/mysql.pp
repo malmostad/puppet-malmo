@@ -1,4 +1,4 @@
-class mcommons::mysql {
+class mcommons::mysql() {
   package { 'libmysqlclient-dev':}
 
   class { '::mysql::bindings':

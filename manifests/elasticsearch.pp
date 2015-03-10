@@ -1,4 +1,4 @@
-class mcommons::elasticsearch {
+define mcommons::elasticsearch() {
   class { '::elasticsearch':
     manage_repo  => true,
     repo_version => $::elasticsearch[version],

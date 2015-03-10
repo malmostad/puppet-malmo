@@ -1,4 +1,4 @@
-class mcommons::ruby::db_migrate {
+define mcommons::ruby::db_migrate() {
   require ::mcommons::ruby
   require ::mcommons::mysql
 

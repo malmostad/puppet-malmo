@@ -1,3 +1,3 @@
-class mcommons::apache::php {
+class mcommons::apache::php() {
   class {'::apache::mod::php': }
 }

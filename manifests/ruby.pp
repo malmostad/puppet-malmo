@@ -1,6 +1,4 @@
-class mcommons::ruby {
-  require ::mcommons::system
-
+class mcommons::ruby() {
   package {[
       'libgdbm3', 'libgdbm-dev',
     ]:

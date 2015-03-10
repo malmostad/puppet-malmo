@@ -1,7 +1,7 @@
-class mcommons::apache {
+class mcommons::apache() {
 
   class { '::apache':
-    # default_vhost => false,
+    default_vhost => false,
     mpm_module    => 'prefork',
   }
 

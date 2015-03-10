@@ -1,4 +1,4 @@
-class mcommons::nginx {
+class mcommons::nginx() {
   apt::ppa { 'ppa:nginx/stable': }
 
   exec { 'nginx-install':

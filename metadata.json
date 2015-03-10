@@ -1,12 +1,15 @@
 {
   "name": "malmo-mcommons",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "author": "Malmo stad",
   "license": "AGPL v3",
+  "source": "https://github.com/malmostad/puppet-mcommons",
+  "project_page": "https://github.com/malmostad/puppet-mcommons",
+  "issues_url": "https://github.com/malmostad/puppet-mcommons/issues",
   "operatingsystem_support": [
     {
     "operatingsystem": "Ubuntu",
-    "operatingsystemrelease": [ "14.04", "16.04" ]
+    "operatingsystemrelease": [ "14.04" ]
     }
    ],
   "dependencies": [

@@ -1,9 +1,9 @@
-class malmo::nginx {
+class mcommons::nginx {
   apt::ppa { 'ppa:nginx/stable': }
 
   exec { 'nginx-install':
     command => '/usr/bin/apt-get install -qq nginx',
-    require => Class['::malmo::system']
+    require => Class['::mcommons::system']
   }
 
   # Parse and copy the conf file
@@ -12,7 +12,7 @@ class malmo::nginx {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('malmo/nginx.erb'),
+    content => template('mcommons/nginx.erb'),
     require => Exec['nginx-install'],
   }
 

@@ -1,11 +1,11 @@
-class malmo::ruby::rails {
+class mcommons::ruby::rails {
 
   file { "database":
     path    => "${::app_home}/config/database.yml",
     # owner   => 'root',
     # group   => 'root',
     # mode    => '0755',
-    content => template('malmo/rails_database.yml.erb'),
+    content => template('mcommons/rails_database.yml.erb'),
   }
 
   file { "secrets":
@@ -13,7 +13,7 @@ class malmo::ruby::rails {
     # owner   => 'root',
     # group   => 'root',
     # mode    => '0755',
-    content => template('malmo/rails_secrets.yml.erb'),
+    content => template('mcommons/rails_secrets.yml.erb'),
   }
 
   # file { "app":
@@ -21,7 +21,7 @@ class malmo::ruby::rails {
   #   # owner   => 'root',
   #   # group   => 'root',
   #   # mode    => '0755',
-  #   content => template('malmo/rails/app_config.erb'),
+  #   content => template('mcommons/rails/app_config.erb'),
   # }
 
   file_line { 'Please edit the apps config file':

@@ -1,4 +1,4 @@
-class malmo::elasticsearch {
+class mcommons::elasticsearch {
   class { '::elasticsearch':
     manage_repo  => true,
     repo_version => $::elasticsearch[version],

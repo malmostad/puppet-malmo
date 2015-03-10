@@ -1,4 +1,4 @@
-class malmo::apache::pagespeed {
+class mcommons::apache::pagespeed {
 
   exec { 'pagespeed-deb-download':
     command => 'wget https://dl-ssl.google.com/dl/linux/direct/mod-pagespeed-stable_current_amd64.deb',

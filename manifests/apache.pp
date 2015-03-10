@@ -1,4 +1,4 @@
-class malmo::apache {
+class mcommons::apache {
 
   class { '::apache':
     # default_vhost => false,

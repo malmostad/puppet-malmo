@@ -1,5 +1,5 @@
-class malmo::ruby::gems {
-  require ::malmo::ruby
+class mcommons::ruby::gems {
+  require ::mcommons::ruby
 
   exec { 'bundle-install-gems':
     command => 'bundle install',

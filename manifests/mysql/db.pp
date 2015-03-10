@@ -1,4 +1,4 @@
-define malmo::mysql::db($db_name) {
+define mcommons::mysql::db($db_name) {
   ::mysql::db { $db_name:
     ensure   => present,
     user     => $::db[user],

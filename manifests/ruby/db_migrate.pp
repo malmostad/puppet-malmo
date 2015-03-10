@@ -1,6 +1,6 @@
-class malmo::ruby::db_migrate {
-  require ::malmo::ruby
-  require ::malmo::mysql
+class mcommons::ruby::db_migrate {
+  require ::mcommons::ruby
+  require ::mcommons::mysql
 
   exec { 'migrate database':
     command => 'bundle exec rake db:migrate',

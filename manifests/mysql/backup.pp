@@ -1,4 +1,4 @@
-define malmo::mysql::backup($db_name) {
+define mcommons::mysql::backup($db_name) {
   class { '::mysql::server::backup':
     ensure          => present,
     backupdatabases => [$db_name],

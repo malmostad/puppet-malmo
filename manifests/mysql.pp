@@ -1,4 +1,4 @@
-class malmo::mysql {
+class mcommons::mysql {
   package { 'libmysqlclient-dev':}
 
   class { '::mysql::bindings':
@@ -22,7 +22,7 @@ class malmo::mysql {
     line => "Password for DB user ${::db[user]}: '${::db[password]}'",
   } ->
 
-  ::malmo::mysql::db { 'create_db':
+  ::mcommons::mysql::db { 'create_db':
     db_name => $::db[name]
   } ->
 
@@ -32,7 +32,7 @@ class malmo::mysql {
   }
 
   if $::db[create_test] {
-    ::malmo::mysql::db { 'create_test_db':
+    ::mcommons::mysql::db { 'create_test_db':
       db_name => "${::db[name]}_test"
     }
     file_line { 'Test database created':
@@ -42,7 +42,7 @@ class malmo::mysql {
   }
 
   if $::db[daily_backup] {
-    ::malmo::mysql::backup { 'backup_main_db':
+    ::mcommons::mysql::backup { 'backup_main_db':
       db_name => $::db[name],
     } ->
 

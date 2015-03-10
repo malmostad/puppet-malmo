@@ -1,4 +1,4 @@
-class malmo::system {
+class mcommons::system {
 
   file_line { 'Remove annoying deprecation warning from Puppet':
     path  => '/etc/puppet/puppet.conf',

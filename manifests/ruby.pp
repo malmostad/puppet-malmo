@@ -1,5 +1,5 @@
-class malmo::ruby {
-  require ::malmo::system
+class mcommons::ruby {
+  require ::mcommons::system
 
   package {[
       'libgdbm3', 'libgdbm-dev',

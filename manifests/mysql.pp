@@ -1,4 +1,17 @@
-class mcommons::mysql() {
+class mcommons::mysql(
+  $db_name          = $::app_name,
+  $db_user          = $::app_user,
+  $db_password      = inline_template('<%= SecureRandom.hex(rand(12..24)) -%>'),
+  $db_root_password = inline_template('<%= SecureRandom.hex(rand(12..24)) -%>'),
+  $create_test_db   = false,
+  $daily_backup     = true,
+  $backup_user      = 'backup_runner',
+  $backup_password  = inline_template('<%= SecureRandom.hex(rand(12..24)) -%>'),
+  $backup_time      = ['3', '45'],
+  $backup_dir       = "${::app_home}/db_backups"
+) {
+  require ::mcommons
+
   package { 'libmysqlclient-dev':}
 
   class { '::mysql::bindings':
@@ -6,49 +19,46 @@ class mcommons::mysql() {
   }
 
   class { '::mysql::server':
-    root_password   => $::db[root_password],
+    root_password   => $db_root_password,
     # remove_default_accounts => true,
     service_enabled => true,
     service_manage  => true,
   } ->
 
   file_line { 'Password for DB user root':
-    path => $::install_info,
-    line => "Password for DB user root: '${::db[root_password]}'",
-  } ->
-
-  file_line { 'Password for DB user':
-    path => $::install_info,
-    line => "Password for DB user ${::db[user]}: '${::db[password]}'",
+    path => $::mcommons::install_info,
+    line => "Password for DB user root: '${db_root_password}'",
   } ->
 
   ::mcommons::mysql::db { 'create_db':
-    db_name => $::db[name]
-  } ->
-
-  file_line { 'Database created':
-    path => $::install_info,
-    line => "Database created: '${::db[name]}'",
+    db_name     => $db_name,
+    db_user     => $db_user,
+    db_password => $db_password,
   }
 
-  if $::db[create_test] {
+  if $create_test {
     ::mcommons::mysql::db { 'create_test_db':
-      db_name => "${::db[name]}_test"
-    }
-    file_line { 'Test database created':
-      path => $::install_info,
-      line => "Test database created: '${::db[name]}_test'",
+      db_name     => "${db_name}_test",
+      db_user     => $db_user,
+      db_password => $db_password,
     }
   }
 
-  if $::db[daily_backup] {
-    ::mcommons::mysql::backup { 'backup_main_db':
-      db_name => $::db[name],
-    } ->
+  if $daily_backup {
+    class { '::mysql::server::backup':
+      ensure          => present,
+      backupdatabases => [$db_name],
+      backupuser      => $backup_user,
+      backuppassword  => $backup_password,
+      backupdir       => $backup_dir,
+      time            => $backup_time,
+      backuprotate    => '60',
+      backupcompress  => true,
+    }
 
-    file_line { 'Password for DB user backup_runner':
-      path => $::install_info,
-      line => "Password for DB user backup_runner: '${::db[backup_password]}'",
+    file_line { "Password for DB user ${backup_user}":
+      path => $::mcommons::install_info,
+      line => "Password for DB backup user ${backup_user}: '${backup_password}'",
     }
   }
 }

@@ -1,5 +1,10 @@
-class mcommons::memcached() {
+class mcommons::memcached(
+  $memory = 512,
+) {
+
+  require ::mcommons
+
   class { '::memcached':
-    max_memory => $::memcached_size
+    max_memory => $memory
   }
 }

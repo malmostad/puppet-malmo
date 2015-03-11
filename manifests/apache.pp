@@ -1,4 +1,5 @@
 class mcommons::apache() {
+  require ::mcommons
 
   class { '::apache':
     default_vhost => false,

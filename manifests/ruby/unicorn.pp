@@ -1,4 +1,6 @@
 class mcommons::ruby::unicorn() {
+  require ::mcommons::ruby
+
   # Parse and copy init.d script
   file { "unicorn-init":
     path    => "/etc/init.d/unicorn-${::app_name}",

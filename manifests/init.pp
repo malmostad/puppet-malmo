@@ -1,4 +1,6 @@
-class mcommons {
+class mcommons(
+  $install_info = "${::runner_home}/install_info.txt"
+) {
   file_line { 'Remove annoying deprecation warning from Puppet':
     path  => '/etc/puppet/puppet.conf',
     line  => '# templatedir var is deprecated',
@@ -14,8 +16,6 @@ class mcommons {
     command => '/usr/bin/apt-get update'
   }
 
-  include git
-
   package {[
       'autoconf', 'bison', 'build-essential', 'libssl-dev',
       'htop',
@@ -29,7 +29,7 @@ class mcommons {
     restrict => ['127.0.0.1'],
   }
 
-  file { $::install_info:
+  file { $install_info:
     mode    => '0600',
     content => "Puppet install details\n======================\n\n"
   }

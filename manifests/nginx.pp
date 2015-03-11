@@ -1,9 +1,9 @@
 class mcommons::nginx() {
+  require ::mcommons
   apt::ppa { 'ppa:nginx/stable': }
 
   exec { 'nginx-install':
     command => '/usr/bin/apt-get install -qq nginx',
-    require => Class['::mcommons::system']
   }
 
   # Parse and copy the conf file

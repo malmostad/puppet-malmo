@@ -1,7 +1,12 @@
-define mcommons::elasticsearch() {
+class mcommons::elasticsearch(
+  $version = '1.4',
+  $memory  = '512m'
+) {
+  require ::mcommons
+
   class { '::elasticsearch':
     manage_repo  => true,
-    repo_version => $::elasticsearch[version],
+    repo_version => $version,
     java_install => true,
     config       => {
       'network.host' => '127.0.0.1',
@@ -12,7 +17,7 @@ define mcommons::elasticsearch() {
 
   file_line { 'Set heap size for ElasticSearch':
     path  => '/etc/init.d/elasticsearch-es-01',
-    line  => "ES_HEAP_SIZE=${::elasticsearch[size]}",
+    line  => "ES_HEAP_SIZE=${$memory}",
     match => 'ES_HEAP_SIZE\s*=',
   }
 

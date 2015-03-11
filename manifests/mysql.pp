@@ -8,7 +8,7 @@ class mcommons::mysql(
   $backup_user      = 'backup_runner',
   $backup_password  = inline_template('<%= SecureRandom.hex(rand(12..24)) -%>'),
   $backup_time      = ['3', '45'],
-  $backup_dir       = "${::app_home}/db_backups"
+  $backup_dir       = "${::runner_home}/db_backups"
 ) {
   require ::mcommons
 

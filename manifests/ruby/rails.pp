@@ -2,7 +2,7 @@ class mcommons::ruby::rails() {
   require ::mcommons::ruby
 
   file { "database":
-    path    => "${::app_home}/config/database.yml",
+    path    => "${::app_config_dir}/database.yml",
     owner   => $::runner_name,
     group   => $::runner_group,
     mode    => '0755',
@@ -10,7 +10,7 @@ class mcommons::ruby::rails() {
   }
 
   file { "secrets":
-    path    => "${::app_home}/config/secrets.yml",
+    path    => "${::app_config_dir}/secrets.yml",
     owner   => $::runner_name,
     group   => $::runner_group,
     mode    => '0755',
@@ -18,7 +18,7 @@ class mcommons::ruby::rails() {
   }
 
   # file { "app":
-  #   path    => "${::app_home}/config/app_config.yml",
+  #   path    => "${::app_config_dir}/app_config.yml",
       # owner   => $::runner_name,
       # group   => $::runner_group,
   #   # mode    => '0755',

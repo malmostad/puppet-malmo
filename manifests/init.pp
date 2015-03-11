@@ -27,4 +27,19 @@ class mcommons(
     mode    => '0600',
     content => "Puppet install details\n======================\n\n"
   }
+
+  # Puppet can't create dirs recursively
+  exec { 'Create config directory':
+    command => "/bin/mkdir -p ${::app_config_dir}"
+  } ->
+  file { "${::app_config_dir}":
+    ensure => 'directory',
+    owner  => $::runner_name,
+    group  => $::runner_group,
+  }
+
+  file { $install_info:
+    mode    => '0600',
+    content => "Puppet install details\n======================\n\n"
+  }
 }

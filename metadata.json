@@ -1,6 +1,6 @@
 {
   "name": "malmo-mcommons",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Malmo stad",
   "summary": "Puppet module for shared configurations for standalone Puppet provisioning of servers and Vagrants at City of Malmö.",
   "license": "AGPL v3",

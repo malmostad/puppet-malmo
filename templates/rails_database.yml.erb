@@ -4,9 +4,9 @@ default: &default
   collation: utf8_swedish_ci
   host: localhost
   pool: 20
-  username: <%= @mcommons::mysql::db_user %>
-  password: <%= @mcommons::mysql::db_password %>
-  database: <%= @mcommons::mysql::db_name %>
+  username: <%= scope.lookupvar('::mcommons::mysql::db_user') %>
+  password: <%= scope.lookupvar('::mcommons::mysql::db_password') %>
+  database: <%= scope.lookupvar('::mcommons::mysql::db_name') %>
 
 <% if @runner_name == 'vagrant' %>
 development:
@@ -16,8 +16,8 @@ production:
   <<: *default
 <% end -%>
 
-<% if @mcommons::mysql::create_test_db -%>
+<% if scope.lookupvar('::mcommons::mysql::create_test_db') -%>
 test:
   <<: *default
-  database: <%= @mcommons::mysql::db_name %>_test
+  database: <%= scope.lookupvar('::mcommons::mysql::db_name') -%>_test
 <% end -%>

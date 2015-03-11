@@ -36,7 +36,7 @@ class mcommons::mysql(
     db_password => $db_password,
   }
 
-  if $create_test {
+  if $create_test_db {
     ::mcommons::mysql::db { 'create_test_db':
       db_name     => "${db_name}_test",
       db_user     => $db_user,

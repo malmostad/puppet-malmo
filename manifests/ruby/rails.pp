@@ -26,7 +26,7 @@ class mcommons::ruby::rails() {
   # }
 
   file_line { 'Please edit the apps config file':
-    path => $::install_info,
+    path => $mcommons::install_info,
     line => "Please edit the apps config file: ${::app_home}/config/app_config.yml",
   }
 }

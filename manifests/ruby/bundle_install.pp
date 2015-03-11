@@ -1,4 +1,4 @@
-class mcommons::ruby::gems() {
+class mcommons::ruby::bundle_install() {
   require ::mcommons::ruby
 
   exec { 'bundle-install-gems':

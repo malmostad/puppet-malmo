@@ -1,10 +1,13 @@
-class mcommons::ruby() {
+class mcommons::ruby(
+  $version = '2.2.1'
+) {
   require ::mcommons
+
   package {[
       'libgdbm3', 'libgdbm-dev',
     ]:
     ensure  => installed,
-  }
+  } ->
 
   class { '::rbenv':
     install_dir => "${::runner_home}/.rbenv",
@@ -12,6 +15,6 @@ class mcommons::ruby() {
     group       => $::runner_group,
   }
   ::rbenv::plugin { 'sstephenson/ruby-build': }
-  ::rbenv::build { $::ruby_version: global => true }
-  ::rbenv::gem { 'bundle': ruby_version => $::ruby_version }
+  ::rbenv::build { $version: global => true }
+  ::rbenv::gem { 'bundle': ruby_version => $version }
 }

@@ -23,11 +23,6 @@ class mcommons(
     restrict => ['127.0.0.1'],
   }
 
-  file { $install_info:
-    mode    => '0600',
-    content => "Puppet install details\n======================\n\n"
-  }
-
   # Puppet can't create dirs recursively
   exec { 'Create config directory':
     command => "/bin/mkdir -p ${::app_config_dir}"

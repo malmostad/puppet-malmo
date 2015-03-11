@@ -1,12 +1,6 @@
 class mcommons(
   $install_info = "${::runner_home}/install_info.txt"
 ) {
-  file_line { 'Remove annoying deprecation warning from Puppet':
-    path  => '/etc/puppet/puppet.conf',
-    line  => '# templatedir var is deprecated',
-    match => 'templatedir\s*=',
-  }
-
   class { '::locales':
     default_value => 'en_US.UTF-8',
     available     => ['en_US.UTF-8 UTF-8', 'sv_SE.UTF-8 UTF-8']

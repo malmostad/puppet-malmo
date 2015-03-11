@@ -4,10 +4,10 @@ default: &default
   collation: utf8_swedish_ci
   host: localhost
   pool: 20
-  username: <%= @db['user'] %>
-  password: <%= @db['password'] %>
+  username: <%= @db_user %>
+  password: <%= @db_password %>
 
-<% if @db['create_test'] -%>
+<% if @create_test -%>
 development:
   <<: *default
   database: <%= @app_name %>

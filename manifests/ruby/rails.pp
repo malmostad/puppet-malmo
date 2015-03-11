@@ -3,24 +3,24 @@ class mcommons::ruby::rails() {
 
   file { "database":
     path    => "${::app_home}/config/database.yml",
-    # owner   => 'root',
-    # group   => 'root',
-    # mode    => '0755',
+    owner   => $::runner_name,
+    group   => $::runner_group,
+    mode    => '0755',
     content => template('mcommons/rails_database.yml.erb'),
   }
 
   file { "secrets":
     path    => "${::app_home}/config/secrets.yml",
-    # owner   => 'root',
-    # group   => 'root',
-    # mode    => '0755',
+    owner   => $::runner_name,
+    group   => $::runner_group,
+    mode    => '0755',
     content => template('mcommons/rails_secrets.yml.erb'),
   }
 
   # file { "app":
   #   path    => "${::app_home}/config/app_config.yml",
-  #   # owner   => 'root',
-  #   # group   => 'root',
+      # owner   => $::runner_name,
+      # group   => $::runner_group,
   #   # mode    => '0755',
   #   content => template('mcommons/rails/app_config.erb'),
   # }

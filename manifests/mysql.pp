@@ -1,6 +1,6 @@
 class mcommons::mysql(
   $db_name          = $::app_name,
-  $db_user          = $::app_user,
+  $db_user          = $::app_name,
   $db_password      = inline_template('<%= SecureRandom.hex(rand(12..24)) -%>'),
   $db_root_password = inline_template('<%= SecureRandom.hex(rand(12..24)) -%>'),
   $create_test_db   = false,

@@ -4,20 +4,20 @@ default: &default
   collation: utf8_swedish_ci
   host: localhost
   pool: 20
-  username: <%= @db_user %>
-  password: <%= @db_password %>
+  username: <%= @mcommons::mysql::db_user %>
+  password: <%= @mcommons::mysql::db_password %>
+  database: <%= @mcommons::mysql::db_name %>
 
-<% if @create_test -%>
+<% if @runner_name == 'vagrant' %>
 development:
   <<: *default
-  database: <%= @app_name %>
-
-test:
-  <<: *default
-  database: <%= @app_name %>_test
 <% else -%>
-
 production:
   <<: *default
-  database: <%= @app_name %>
+<% end -%>
+
+<% if @mcommons::mysql::create_test_db -%>
+test:
+  <<: *default
+  database: <%= @mcommons::mysql::db_name %>_test
 <% end -%>

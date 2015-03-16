@@ -1,8 +1,14 @@
 class mcommons::ruby::rails() {
   require ::mcommons::ruby
 
+  if $::envs[production]
+    $config_dir = "${::runner_home}/${::app_name}/shared/config"
+  else
+    $config_dir = '/vagrant/config'
+  end
+
   file { "database":
-    path    => "${::app_config_dir}/database.yml",
+    path    => "${config_dir}/database.yml",
     owner   => $::runner_name,
     group   => $::runner_group,
     mode    => '0755',
@@ -10,7 +16,7 @@ class mcommons::ruby::rails() {
   }
 
   file { "secrets":
-    path    => "${::app_config_dir}/secrets.yml",
+    path    => "${config_dir}/secrets.yml",
     owner   => $::runner_name,
     group   => $::runner_group,
     mode    => '0755',
@@ -18,7 +24,7 @@ class mcommons::ruby::rails() {
   }
 
   # file { "app":
-  #   path    => "${::app_config_dir}/app_config.yml",
+  #   path    => "${config_dir}/app_config.yml",
       # owner   => $::runner_name,
       # group   => $::runner_group,
   #   # mode    => '0755',

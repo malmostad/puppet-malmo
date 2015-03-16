@@ -1,5 +1,6 @@
 class mcommons::ruby::rails() {
   require ::mcommons::ruby
+  include nodejs
 
   if 'production' in $::envs {
     $config_dir = "${::runner_home}/${::app_name}/shared/config"

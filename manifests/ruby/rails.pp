@@ -1,11 +1,12 @@
 class mcommons::ruby::rails() {
   require ::mcommons::ruby
 
-  if $::envs[production]
+  if 'production' in $::envs {
     $config_dir = "${::runner_home}/${::app_name}/shared/config"
-  else
+  }
+  else {
     $config_dir = '/vagrant/config'
-  end
+  }
 
   file { "database":
     path    => "${config_dir}/database.yml",

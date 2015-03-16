@@ -24,14 +24,14 @@ class mcommons(
   }
 
   # Brute force creating of basic app directories in prod
-  if $::envs[production]
+  if $::envs[production] {
     $dirs = [
       "${::runner_home}/${::app_name}",
       "${::runner_home}/${::app_name}/current",
       "${::runner_home}/${::app_name}/shared",
       "${::runner_home}/${::app_name}/shared/config"
     ]
-  end
+  }
 
   file { $install_info:
     mode    => '0600',

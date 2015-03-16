@@ -7,7 +7,6 @@ class mcommons::ruby::rails() {
 
     $create_dirs = [
       "${::runner_home}/${::app_name}",
-      "${::runner_home}/${::app_name}/current",
       "${::runner_home}/${::app_name}/shared",
       $config_dir
     ]

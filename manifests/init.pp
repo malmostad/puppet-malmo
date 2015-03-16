@@ -23,20 +23,6 @@ class mcommons(
     restrict => ['127.0.0.1'],
   }
 
-  if 'production' in $::envs {
-    $dirs = [
-      "${::runner_home}/${::app_name}",
-      "${::runner_home}/${::app_name}/current",
-      "${::runner_home}/${::app_name}/shared",
-      "${::runner_home}/${::app_name}/shared/config"
-    ]
-    file { $dirs:
-      ensure => 'directory',
-      owner  => $::runner_name,
-      group  => $::runner_group,
-    }
-  }
-
   file { $install_info:
     mode    => '0600',
     content => "Puppet install details\n======================\n\n"

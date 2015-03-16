@@ -4,6 +4,19 @@ class mcommons::ruby::rails() {
 
   if 'production' in $::envs {
     $config_dir = "${::runner_home}/${::app_name}/shared/config"
+
+    $create_dirs = [
+      "${::runner_home}/${::app_name}",
+      "${::runner_home}/${::app_name}/current",
+      "${::runner_home}/${::app_name}/shared",
+      $config_dir
+    ]
+
+    file { $create_dirs:
+      ensure => 'directory',
+      owner  => $::runner_name,
+      group  => $::runner_group,
+    }
   }
   else {
     $config_dir = '/vagrant/config'

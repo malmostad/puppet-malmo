@@ -15,7 +15,7 @@ server {
   ssl_certificate /etc/ssl/certs/<%= @fqdn %>.crt;
   ssl_certificate_key /etc/ssl/private/<%= @fqdn %>.key;
 
-  root <%= @app_home %>;
+  root <%= @app_home %>/public;
 
   location ^~ /assets/ {
     gzip_static on;

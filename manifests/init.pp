@@ -1,5 +1,6 @@
 class mcommons(
-  $install_info = "${::runner_home}/install_info.txt"
+  $install_info = "${::runner_home}/install_info.txt",
+  $timestamp    = inline_template('<%= Time.new -%>'),
 ) {
   class { '::locales':
     default_value => 'en_US.UTF-8',
@@ -25,6 +26,6 @@ class mcommons(
 
   file { $install_info:
     mode    => '0600',
-    content => "Puppet install details\n======================\n\n"
+    content => "Puppet install details\n======================\nGenerated: ${timestamp}\n"
   }
 }

@@ -17,7 +17,7 @@ class mcommons::elasticsearch(
 
   file_line { 'Set heap size for ElasticSearch':
     path  => '/etc/init.d/elasticsearch-es-01',
-    line  => "ES_HEAP_SIZE=${$memory}",
+    line  => "ES_HEAP_SIZE=${memory}",
     match => 'ES_HEAP_SIZE\s*=',
   }
 

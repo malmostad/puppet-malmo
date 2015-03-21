@@ -7,6 +7,12 @@ class mcommons(
     available     => ['en_US.UTF-8 UTF-8', 'sv_SE.UTF-8 UTF-8']
   }
 
+  file_line { 'Fix Puppets internal deprecation warnings':
+    path  => '/etc/puppet/puppet.conf',
+    line  => '# Removed deprecated templatedir variable',
+    match => '^templatedir',
+  }
+
   exec { 'apt-get-update':
     command => '/usr/bin/apt-get update'
   }

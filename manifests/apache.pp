@@ -2,7 +2,7 @@ class mcommons::apache(
   $ssl                     = true,
   $force_ssl               = true,
   $php                     = false,
-  $generate_snakeoil_certs = false,
+  $snakeoil_certs = false,
 ) {
   require ::mcommons
 
@@ -16,9 +16,12 @@ class mcommons::apache(
   }
 
   if $force_ssl {
-    ::apache::vhost { "${::fqdn}-80":
+    ::apache::vhost { $::app_name:
+      servername       => $::fqdn,
+      port             => '80',
       docroot          => $::app_home,
       fallbackresource => '/index.php',
+      override         => 'All',
       rewrites         => [ {
         rewrite_cond => ['%{HTTPS} off'],
         rewrite_rule => ['(.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]'],
@@ -26,26 +29,30 @@ class mcommons::apache(
     }
   }
   else {
-    ::apache::vhost { "${::fqdn}-80":
+    ::apache::vhost { $::app_name:
+      servername       => $::fqdn,
+      port             => '80',
       docroot          => $::app_home,
+      override         => 'All',
       fallbackresource => '/index.php',
     }
   }
 
 
   if $ssl {
-    if $generate_snakeoil_certs {
+    if $snakeoil_certs {
       $cert_base_name = "${::fqdn}-snakeoil"
-      require ::mcommons::generate_snakeoil_certs
+      require ::mcommons::snakeoil_certs
     } else {
       $cert_base_name = $::fqdn
     }
 
-
-    ::apache::vhost { "${::fqdn}-443":
+    ::apache::vhost { "${::app_name}-ssl":
+      servername       => $::fqdn,
       port             => '443',
       docroot          => $::app_home,
       fallbackresource => '/index.php',
+      override         => 'All',
       ssl              => true,
       ssl_cert         => "/etc/ssl/certs/${cert_base_name}.crt",
       ssl_key          => "/etc/ssl/private/${cert_base_name}.key",

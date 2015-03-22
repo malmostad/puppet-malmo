@@ -3,8 +3,13 @@ class mcommons::apache(
   $force_ssl      = true,
   $port           = 80,
   $ssl_port       = 443,
+  $serverlimit    = 512,
+  $maxclients     = 512,
+  $snakeoil       = false,
   $php            = false,
-  $snakeoil = false,
+  $opcache        = 'On',
+  $opcache_memory = 512,
+  $opcache_files  = 4000,
 ) {
   require ::mcommons
 
@@ -19,10 +24,20 @@ class mcommons::apache(
 
   if $php {
     class { '::apache::mod::prefork':
-      serverlimit => '512',
-      maxclients  => '512',
+      serverlimit => $serverlimit,
+      maxclients  => $maxclients,
     } ->
-    class { '::apache::mod::php': }
+    class { '::apache::mod::php': } ->
+
+    file { '/etc/php5/mods-available/opcache.ini':
+      replace => true,
+      content => "; Puppet generated
+zend_extension=opcache.so
+opcache.enable=${opcache}
+opcache.memory_consumption=${opcache_memory}
+opcache.max_accelerated_files=${opcache_files}
+",
+    }
 
     $directory_index = 'index.php index.html'
     $mpm_module      = 'prefork'

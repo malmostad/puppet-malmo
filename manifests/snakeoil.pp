@@ -1,4 +1,4 @@
-class mcommons::snakeoil_certs() {
+class mcommons::snakeoil() {
   require ::mcommons
 
   exec { 'generate-self-signed-ssl-certs':

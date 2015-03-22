@@ -8,14 +8,19 @@ class mcommons::mysql(
   $backup_user      = 'backup_runner',
   $backup_password  = inline_template('<%= SecureRandom.hex(rand(12..24)) -%>'),
   $backup_time      = ['3', '45'],
-  $backup_dir       = "${::runner_home}/db_backups"
+  $backup_dir       = "${::runner_home}/db_backups",
+  $ruby_enable      = false,
+  $php_enable       = false,
+  $python_enable    = false,
 ) {
   require ::mcommons
 
   package { 'libmysqlclient-dev':}
 
   class { '::mysql::bindings':
-    ruby_enable => true
+    ruby_enable   => $ruby_enable,
+    php_enable    => $php_enable,
+    python_enable => $python_enable,
   }
 
   class { '::mysql::server':

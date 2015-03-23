@@ -21,7 +21,7 @@ class mcommons::ruby::rails() {
     $config_dir = '/vagrant/config'
   }
 
-  file { "database":
+  file { 'database':
     path    => "${config_dir}/database.yml",
     owner   => $::runner_name,
     group   => $::runner_group,
@@ -29,7 +29,7 @@ class mcommons::ruby::rails() {
     content => template('mcommons/rails_database.yml.erb'),
   }
 
-  file { "secrets":
+  file { 'secrets':
     path    => "${config_dir}/secrets.yml",
     owner   => $::runner_name,
     group   => $::runner_group,

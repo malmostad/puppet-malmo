@@ -1,0 +1,56 @@
+<?php
+<%
+  protocol = 'http:'
+  specified_port = ''
+
+  if scope.lookupvar('::mcommons::apache::force_ssl')
+    protocol = 'https:'
+    # Alt ports may be used by Vagrant forwarding
+    specified_port = scope.lookupvar('::mcommons::apache::ssl_port').to_i == 443 ? '' : ":#{scope.lookupvar('::mcommons::apache::ssl_port')}"
+  else
+    specified_port = scope.lookupvar('::mcommons::apache::port').to_i == 80 ? '' : ":#{scope.lookupvar('::mcommons::apache::port')}"
+  end
+
+  base_url = "#{protocol}//#{@fqdn}#{specified_port}/"
+%>
+
+define('WP_SITEURL', '<%= base_url %>');
+define('WP_HOME',    '<%= base_url %>');
+
+define('DB_NAME',     '<%= scope.lookupvar('::mcommons::mysql::db_name') %>');
+define('DB_USER',     '<%= scope.lookupvar('::mcommons::mysql::db_user') %>');
+define('DB_PASSWORD', '<%= scope.lookupvar('::mcommons::mysql::db_password') %>');
+define('DB_HOST',     'localhost');
+define('DB_CHARSET',  'utf8');
+define('DB_COLLATE',  'utf8_swedish_ci');
+$table_prefix = 'wp_';
+
+define ('WPLANG', 'sv_SE');
+define('ENV',     '<%= @envs.first %>');
+
+define('WP_DEBUG',           <%= @envs.include?('development') ? 'true' : 'false' %>);
+define('WP_DEBUG_LOG',       true);
+define('WP_DEBUG_DISPLAY',   false);
+define('SAVEQUERIES',        false);
+define('FORCE_SSL_LOGIN',    <%= scope.lookupvar('::mcommons::apache::force_ssl') %>);
+define('DISALLOW_FILE_EDIT', true);
+
+define('PORTWISE_IP_ADDRESS',
+  '161.52.x.x,
+   161.52.x.y');
+define('PORTWISE_TOKEN',       '<ADD_TOKEN>');
+define('PORTWISE_REQUIRE_SSL', true);
+define('PORTWISE_SIGNOUT_URL', 'https://pwdev.malmo.se/wa/logout');
+
+define('AUTH_KEY',         '<%= SecureRandom.hex(64) -%>');
+define('SECURE_AUTH_KEY',  '<%= SecureRandom.hex(64) -%>');
+define('LOGGED_IN_KEY',    '<%= SecureRandom.hex(64) -%>');
+define('NONCE_KEY',        '<%= SecureRandom.hex(64) -%>');
+define('AUTH_SALT',        '<%= SecureRandom.hex(64) -%>');
+define('SECURE_AUTH_SALT', '<%= SecureRandom.hex(64) -%>');
+define('LOGGED_IN_SALT',   '<%= SecureRandom.hex(64) -%>');
+define('NONCE_SALT',       '<%= SecureRandom.hex(64) -%>');
+
+if ( !defined('ABSPATH') )
+  define('ABSPATH', dirname(__FILE__) . '/');
+require_once(ABSPATH . 'wp-settings.php');

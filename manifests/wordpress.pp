@@ -7,22 +7,22 @@ class mcommons::wordpress(
     tar_gz_url => $tar_gz_url
   }
 
-  # Parse and copy wp-config
+  # Generate wp-config
   -> file { 'Add Wordpress config file':
-    path    => "${::app_home}/wp-config.php",
+    path    => "${::doc_root}/wp-config.php",
     owner   => $::runner_name,
     group   => $::runner_group,
     mode    => '0644',
     content => template('mcommons/wp-config.php.erb'),
   }
 
-  # Parse and copy WP's .htaccess
+  # Generate .htaccess
   -> file { 'Add Wordpress .htaccess file':
-    path    => "${::app_home}/.htacess",
+    path    => "${::doc_root}/.htacess",
     owner   => $::runner_name,
     group   => $::runner_group,
     mode    => '0644',
-    content => template('mcommons/wp-htacess.erb'),
+    content => template('mcommons/wp-htaccess.erb'),
   }
 
   # Create uploads dir
@@ -33,32 +33,25 @@ class mcommons::wordpress(
   }
 
   # Symlink uploads directory
-  -> file { "${::app_home}/wp-content/uploads":
+  -> file { "${::doc_root}/wp-content/uploads":
     ensure => 'link',
     target => "${::runner_home}/wordpress-uploads",
     owner  => $::runner_name,
     group  => $::runner_group,
   }
 
-  # Capistrano catalog structure
-  -> file { ["${::runner_home}/wordpress-deployed", "${::runner_home}/wordpress-deployed/current"]:
-    ensure => 'directory',
-    owner  => $::runner_name,
-    group  => $::runner_group,
-  }
-
   # Symlink themes directory
-  -> file { "${::app_home}/wp-content/themes":
+  -> file { "${::doc_root}/wp-content/themes":
     ensure => 'link',
-    target => "${::runner_home}/wordpress-deployed/current/themes",
+    target => "${::app_home}/themes",
     owner  => $::runner_name,
     group  => $::runner_group,
   }
 
   # Symlink plugins directory
-  -> file { "${::app_home}/wp-content/plugins":
+  -> file { "${::doc_root}/wp-content/plugins":
     ensure => 'link',
-    target => "${::runner_home}/wordpress-deployed/current/plugins",
+    target => "${::app_home}/plugins",
     owner  => $::runner_name,
     group  => $::runner_group,
   }

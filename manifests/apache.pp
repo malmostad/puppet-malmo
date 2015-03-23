@@ -62,12 +62,12 @@ opcache.max_accelerated_files=${opcache_files}
       rewrite_rule => ["(.*) https://%{SERVER_NAME}${add_ssl_port}%{REQUEST_URI} [R=301,L]"],
     } ]
   } else {
-    $rewrites = [{}]
+    $rewrites = [ {} ]
   }
 
   ::apache::vhost { $::app_name:
     servername     => $::fqdn,
-    docroot        => $::app_home,
+    docroot        => $::doc_root,
     port           => $port,
     directoryindex => $directory_index,
     headers        => ['Set X-UA-Compatible "IE=Edge,chrome=1"'],

@@ -16,7 +16,16 @@ class mcommons::wordpress(
     content => template('mcommons/wp-config.php.erb'),
   }
 
-  # Create uploads dir if not there
+  # Parse and copy WP's .htaccess
+  -> file { 'Add Wordpress .htaccess file':
+    path    => "${::app_home}/.htacess",
+    owner   => $::runner_name,
+    group   => $::runner_group,
+    mode    => '0644',
+    content => template('mcommons/wp-htacess.erb'),
+  }
+
+  # Create uploads dir
   -> file { "${::runner_home}/wordpress-uploads":
     ensure => 'directory',
     owner  => 'www-data',
@@ -41,7 +50,6 @@ class mcommons::wordpress(
   # Symlink themes directory
   -> file { "${::app_home}/wp-content/themes":
     ensure => 'link',
-    force  => true,
     target => "${::runner_home}/wordpress-deployed/current/themes",
     owner  => $::runner_name,
     group  => $::runner_group,
@@ -50,7 +58,6 @@ class mcommons::wordpress(
   # Symlink plugins directory
   -> file { "${::app_home}/wp-content/plugins":
     ensure => 'link',
-    force  => true,
     target => "${::runner_home}/wordpress-deployed/current/plugins",
     owner  => $::runner_name,
     group  => $::runner_group,

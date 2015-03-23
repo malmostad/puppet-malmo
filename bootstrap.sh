@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# This bootstraps Puppet on Ubuntu
+# Bootstraps Puppet on Ubuntu 14.04
 #
 set -e
 
@@ -38,13 +38,13 @@ DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -
 # Adapt Puppet to it's own requirements ...
 touch /etc/puppet/hiera.yaml >/dev/null
 
-echo "Installing Puppet modules"
+echo "Installing malmo-mcommons Puppet module"
 wget https://github.com/malmostad/puppet-mcommons/archive/master.tar.gz -O malmo-mcommons.tar.gz 2>/dev/null
 puppet module install malmo-mcommons.tar.gz
 rm malmo-mcommons.tar.gz >/dev/null
 
-# Vagrant use vagrant.pp for Puppet provisioning
-# Use server.pp if we are not in a Bagrant box
+# Vagrant uses vagrant.pp for Puppet provisioning
+# We use server.pp if we are not in a Vagrant box
 if ! [ -e "/vagrant" ]
 then
   echo "Starting Puppet provisioning defined in server.pp"

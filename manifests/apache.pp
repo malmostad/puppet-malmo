@@ -8,7 +8,7 @@ class mcommons::apache(
   $snakeoil       = false,
   $php            = false,
   $opcache        = 'On',
-  $opcache_memory = 512,
+  $opcache_memory = 128,
   $opcache_files  = 4000,
 ) {
   require ::mcommons
@@ -62,7 +62,7 @@ opcache.max_accelerated_files=${opcache_files}
       rewrite_rule => ["(.*) https://%{SERVER_NAME}${add_ssl_port}%{REQUEST_URI} [R=301,L]"],
     } ]
   } else {
-    $rewrites = []
+    $rewrites = [{}]
   }
 
   ::apache::vhost { $::app_name:

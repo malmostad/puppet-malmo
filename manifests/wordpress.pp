@@ -22,6 +22,15 @@ class mcommons::wordpress(
     cwd     => $::runner_home,
   } ->
 
+  # Parse and copy init.d script
+  file { 'Add Wordpress config file':
+    path    => "${::app_home}/wp-config.php",
+    owner   => $::runner_name,
+    group   => $::runner_group,
+    mode    => '0644',
+    content => template('mcommons/wp-config.php.erb'),
+  } ->
+
   # exec { 'Change ownership of wordpress uploads dir':
   #   command => "/bin/chown -R www-data:www-data ${::app_home}/wp-content/uploads",
   # } ->

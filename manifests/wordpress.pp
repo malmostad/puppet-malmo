@@ -1,5 +1,5 @@
 class mcommons::wordpress(
-  $tar_gz_url,
+  $tar_gz_url = 'https://sv.wordpress.org/latest-sv_SE.tar.gz',
   $plugins      = [],
   $table_prefix = 'wp_',
 ) {

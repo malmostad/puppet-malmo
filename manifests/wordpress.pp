@@ -1,11 +1,15 @@
 class mcommons::wordpress(
-  $tar_gz_url = 'https://sv.wordpress.org/latest-sv_SE.tar.gz',
+  $tar_gz_url   = 'https://sv.wordpress.org/latest-sv_SE.tar.gz',
+  $plugins      = [],
+  $table_prefix = 'wp_',
 ) {
   require ::mcommons::apache
 
   class { '::mcommons::wordpress::install':
-    tar_gz_url => $tar_gz_url
+    tar_gz_url => $tar_gz_url,
   }
+
+  ::mcommons::wordpress::install_plugins { $plugins: }
 
   # Generate wp-config
   -> file { 'Add Wordpress config file':

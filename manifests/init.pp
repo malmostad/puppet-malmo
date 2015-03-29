@@ -30,6 +30,13 @@ class mcommons(
     restrict => ['127.0.0.1'],
   }
 
+  exec { "Create ${::app_home}":
+    command => "/bin/mkdir -p ${::app_home}",
+    user    => $::runner_name,
+    path    => $::runner_path,
+    creates => $::app_home,
+  }
+
   file { $install_info:
     mode    => '0600',
     content => "Puppet install details\n======================\nGenerated: ${timestamp}\n"

@@ -8,7 +8,7 @@ class mcommons::wordpress(
   }
 
   # Generate wp-config
-  -> file { 'Add Wordpress config file':
+  -> file { 'Generate Wordpress config file':
     path    => "${::doc_root}/wp-config.php",
     owner   => $::runner_name,
     group   => $::runner_group,
@@ -17,7 +17,7 @@ class mcommons::wordpress(
   }
 
   # Generate .htaccess
-  -> file { 'Add Wordpress .htaccess file':
+  -> file { 'Generate Wordpress .htaccess file':
     path    => "${::doc_root}/.htacess",
     owner   => $::runner_name,
     group   => $::runner_group,

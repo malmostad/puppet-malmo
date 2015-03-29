@@ -19,7 +19,7 @@ class mcommons(
 
   package {[
       'autoconf', 'bison', 'build-essential', 'libssl-dev',
-      'git', 'htop', 'unzip',
+      'htop', 'unzip',
     ]:
     ensure  => installed,
     require => Exec['apt-get-update'],

@@ -4,7 +4,7 @@ class mcommons::wordpress::install(
   $archive_file = 'wordpress.tar.gz'
 
   exec { "Download Wordpress from ${$tar_gz_url}":
-    command => "/usr/bin/wget ${$tar_gz_url} -O ${archive_file}",
+    command => "/usr/bin/wget ${tar_gz_url} -O ${archive_file}",
     cwd     => $::runner_home,
     user    => $::runner_name,
     group   => $::runner_group,

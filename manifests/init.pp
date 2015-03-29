@@ -33,6 +33,7 @@ class mcommons(
   exec { "Create ${::app_home}":
     command => "/bin/mkdir -p ${::app_home}",
     user    => $::runner_name,
+    group   => $::runner_group,
     path    => $::runner_path,
     creates => $::app_home,
   }

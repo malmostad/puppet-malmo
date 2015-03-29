@@ -6,11 +6,15 @@ class mcommons::wordpress::install(
   exec { "Download Wordpress from ${$tar_gz_url}":
     command => "/usr/bin/wget ${$tar_gz_url} -O ${archive_file}",
     cwd     => $::runner_home,
+    user    => $::runner_name,
+    group   => $::runner_group,
   }
 
   -> exec { 'Extract Wordpress':
     command => "/bin/tar zxvf ${archive_file} --exclude wp-content/themes --exclude wp-content/plugins",
     cwd     => $::runner_home,
+    user    => $::runner_name,
+    group   => $::runner_group,
   }
 
   -> exec { 'Cleanup installer':

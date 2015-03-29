@@ -10,12 +10,12 @@ class mcommons::wordpress::vagrant(
     cwd     => '/vagrant',
   }
 
+  -> run_cap_task { $capistrano_tasks: }
+
   define run_cap_task {
     exec { "Running Capistrano task ${name}":
       command => "/usr/bin/env cap vagrant ${name}",
       cwd     => '/vagrant',
     }
   }
-
-  run_cap_task { $capistrano_tasks: }
 }

@@ -68,6 +68,8 @@ opcache.max_accelerated_files=${opcache_files}
   ::apache::vhost { $::app_name:
     servername     => $::fqdn,
     docroot        => $::doc_root,
+    docroot_owner  => $::runner_name,
+    docroot_group  => $::runner_group,
     port           => $port,
     directoryindex => $directory_index,
     headers        => ['Set X-UA-Compatible "IE=Edge,chrome=1"'],
@@ -87,6 +89,8 @@ opcache.max_accelerated_files=${opcache_files}
       servername     => $::fqdn,
       port           => $ssl_port,
       docroot        => $::app_home,
+      docroot_owner  => $::runner_name,
+      docroot_group  => $::runner_group,
       directoryindex => $directory_index,
       headers        => ['Set X-UA-Compatible "IE=Edge,chrome=1"'],
       override       => 'All',

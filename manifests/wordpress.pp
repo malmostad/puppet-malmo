@@ -3,6 +3,8 @@ class mcommons::wordpress(
   $table_prefix = 'wp_',
 ) {
 
+  require ::mcommons::apache
+
   class { '::mcommons::wordpress::install':
     tar_gz_url => $tar_gz_url,
   }

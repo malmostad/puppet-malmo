@@ -12,11 +12,11 @@ The `mcommons` module uses several third-party Puppet modules listed in `metadat
 
 The provisioning of a server using `mcommons` works like this:
 
-Download the `bootstrap.sh` script from this repo to the server along with the `server.pp` from the application's `puppet/` directory. They must be placed in the same directory on the server. When you execute the bootstrap script, it sets up Puppet and initiates `server.pp`. The latter downloads `mcommons` which in turn downloads the Puppet modules it needs.
+Download the `bootstrap.sh` script from this repo to the server along with the `server.pp` from the application's `puppet/` directory. They must be placed in the same directory on the server. When you execute the bootstrap script, it sets up Puppet with `mcommons` and initiates `server.pp`.
 
 The provisioning of a Vagrant box for development and testing shares most of it's configuration with the server. It works like this:
 
-You need to have Vagrant and VirtualBox or VMWare on your own machine. Clone the repository for the application you are working with to your own machine. Run `vagrant up` in the applications root. It uses the `Vagrantfile` to create an Ubuntu 14.04 Vagrant instance and starts the provisioning using `bootstrap.sh` and the projects `puppet/vagrant.pp` file.
+You need to have Vagrant and VirtualBox or VMWare on your own machine. Clone the repository for the application you are working with to your own machine. Run `vagrant up` in the applications root. It uses the `Vagrantfile` to create an Ubuntu 14.04 Vagrant instance and starts the provisioning by fetching `bootstrap.sh`, executes it and the projects `puppet/vagrant.pp` file.
 
 
 ## License

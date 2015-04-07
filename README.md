@@ -1,14 +1,14 @@
 # mcommons
 
-`malmo-mcommons` is an opinionated [Puppet](https://puppetlabs.com/) module that contains common configurations we use for provisioning of servers and [Vagrants](https://www.vagrantup.com/). Puppet is used in a standalone mode without a master. Ubuntu 14.04 is the target system.
+`malmo-mcommons` is an opinionated [Puppet](https://puppetlabs.com/) module that contains common configurations we use for provisioning of servers and [Vagrants](https://www.vagrantup.com/). Puppet is used in standalone mode without a master. Ubuntu 14.04 is the target system.
 
-The exact selection of system components to install for a specific application is defined in each projects `puppet/server.pp` and `puppet/vagrant.pp` files. See e.g. the [Sitesearch](https://github.com/malmostad/sitesearch) and [wp-apps](https://github.com/malmostad/wp-apps) repos.
+The exact selection of system components to install for a specific application is defined in the applications `puppet/server.pp` and `puppet/vagrant.pp` files. See e.g. the [Sitesearch](https://github.com/malmostad/sitesearch) and [wp-apps](https://github.com/malmostad/wp-apps) repos.
 
 Each repo that are using `mcommons` have the instructions you need to run the provisioning tool.
 
 
 ## The internals
-The `mcommons` module uses several third-party Puppet modules listed in `metadata.json`. Applications using `mcommons` have a `puppet/` directory containing references to definitions in `mcommons`. Each applications Puppet definitions should be minimal.
+The `mcommons` module uses several third-party Puppet modules listed in `metadata.json`. Applications using `mcommons` have a `puppet/` directory with two files, `vagrant.pp` and `server.pp`, using `mcommons` as a dependency. Each application's Puppet definitions should be minimal.
 
 The provisioning of a server using `mcommons` works like this:
 

@@ -20,7 +20,7 @@ class mcommons::wordpress(
 
   # Generate .htaccess
   -> file { 'Generate Wordpress .htaccess file':
-    path    => "${::doc_root}/.htacess",
+    path    => "${::doc_root}/.htaccess",
     owner   => $::runner_name,
     group   => $::runner_group,
     mode    => '0644',

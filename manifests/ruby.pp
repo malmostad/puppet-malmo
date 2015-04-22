@@ -4,7 +4,7 @@ class mcommons::ruby(
   require ::mcommons
 
   package {[
-      'libgdbm3', 'libgdbm-dev',
+      'libgdbm3', 'libgdbm-dev', 'libcurl4-gnutls-dev'
     ]:
     ensure  => installed,
   } ->

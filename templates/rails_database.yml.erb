@@ -17,7 +17,9 @@ production:
 <% end -%>
 
 <% if scope.lookupvar('::mcommons::mysql::create_test_db') -%>
-test:
+test: &test
   <<: *default
   database: <%= scope.lookupvar('::mcommons::mysql::db_name') -%>_test
+local_test:
+  <<: *test
 <% end -%>

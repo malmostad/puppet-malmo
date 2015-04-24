@@ -37,6 +37,12 @@ class mcommons::ruby::rails() {
     content => template('mcommons/rails_secrets.yml.erb'),
   }
 
+  ::logrotate::rule { $::app_name:
+    path         => "${::runner_home}/${::app_name}/shared/log",
+    rotate       => 52,
+    rotate_every => 'week',
+  }
+
   # file { "app":
   #   path    => "${config_dir}/app_config.yml",
       # owner   => $::runner_name,

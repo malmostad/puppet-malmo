@@ -1,17 +1,16 @@
 class mcommons::wordpress(
   $tar_gz_url = 'https://sv.wordpress.org/latest-sv_SE.tar.gz',
-  $plugins      = [],
   $table_prefix = 'wp_',
 ) {
+
+  require ::mcommons::apache
 
   class { '::mcommons::wordpress::install':
     tar_gz_url => $tar_gz_url,
   }
 
-  ::mcommons::wordpress::install_plugins { $plugins: }
-
   # Generate wp-config
-  -> file { 'Add Wordpress config file':
+  -> file { 'Generate Wordpress config file':
     path    => "${::doc_root}/wp-config.php",
     owner   => $::runner_name,
     group   => $::runner_group,
@@ -20,8 +19,8 @@ class mcommons::wordpress(
   }
 
   # Generate .htaccess
-  -> file { 'Add Wordpress .htaccess file':
-    path    => "${::doc_root}/.htacess",
+  -> file { 'Generate Wordpress .htaccess file':
+    path    => "${::doc_root}/.htaccess",
     owner   => $::runner_name,
     group   => $::runner_group,
     mode    => '0644',

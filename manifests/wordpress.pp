@@ -57,4 +57,10 @@ class mcommons::wordpress(
     owner  => $::runner_name,
     group  => $::runner_group,
   }
+
+  cron { 'wordpress_cron_tasks':
+    command => "cd ${::doc_root} && /usr/bin/php wp-cron.php >/dev/null 2>&1",
+    user    => $::runner_name,
+    minute  => '*/5'
+  }
 }

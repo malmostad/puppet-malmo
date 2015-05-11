@@ -6,6 +6,8 @@ class mcommons::nginx() {
     command => '/usr/bin/apt-get install -qq nginx',
   }
 
+  require ::mcommons::snakeoil
+
   # Parse and copy the conf file
   file { "nginx_conf":
     path    => "/etc/nginx/sites-available/${::app_name}",

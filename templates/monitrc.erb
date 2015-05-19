@@ -8,16 +8,16 @@ set eventqueue
     basedir /var/lib/monit/events
     slots 100
 
-set mailserver relay.malmo.se # port 587
-#   using tlsv1
-    with timeout 30 seconds
+# set mailserver smtp.example.org
+#     using tlsv1
+#     with timeout 30 seconds
 
-set alert sysadmin@grandgrid.com
+set alert root@localhost
 
 set httpd port 2812
     use address localhost
     allow localhost
-    allow admin:<%= SecureRandom.hex(rand(12..24)) -%>
+    allow admin:<%= SecureRandom.hex(rand(12..24)) %>
 
 check system <%= @fqdn -%>
   if loadavg(5min) > 2 for 2 cycles then alert

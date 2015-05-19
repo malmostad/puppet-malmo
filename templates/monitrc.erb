@@ -1,0 +1,27 @@
+set daemon 30
+
+set logfile /var/log/monit.log
+set idfile /var/lib/monit/id
+set statefile /var/lib/monit/state
+
+set eventqueue
+    basedir /var/lib/monit/events
+    slots 100
+
+set mailserver relay.malmo.se # port 587
+#   using tlsv1
+    with timeout 30 seconds
+
+set alert sysadmin@grandgrid.com
+
+set httpd port 2812
+    use address localhost
+    allow localhost
+    allow admin:<%= SecureRandom.hex(rand(12..24)) -%>
+
+check system <%= @fqdn -%>
+  if loadavg(5min) > 2 for 2 cycles then alert
+  if memory > 75% for 2 cycles then alert
+  if cpu(user) > 75% for 2 cycles then alert
+
+include /etc/monit/conf.d/*

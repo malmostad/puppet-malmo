@@ -2,7 +2,11 @@ class mcommons::nginx() {
   require ::mcommons
   apt::ppa { 'ppa:nginx/stable': }
 
-  exec { 'nginx-install':
+  exec { 'apt-get-update-nginx':
+    command => '/usr/bin/apt-get update'
+  }
+
+  -> exec { 'nginx-install':
     command => '/usr/bin/apt-get install -qq nginx',
   }
 

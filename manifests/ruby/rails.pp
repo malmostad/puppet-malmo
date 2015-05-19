@@ -6,7 +6,7 @@ class mcommons::ruby::rails() {
     $config_dir = "${::runner_home}/${::app_name}/shared/config"
 
     $create_dirs = [
-      "${::runner_home}/${::app_name}",
+      "${::runner_home}/deploy_dump",
       "${::runner_home}/${::app_name}/shared",
       $config_dir
     ]

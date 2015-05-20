@@ -12,6 +12,8 @@ default: &default
 development:
   <<: *default
 <% else -%>
+test:
+  <<: *default
 production:
   <<: *default
 <% end -%>

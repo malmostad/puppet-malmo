@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Set users rbenv environment and execute a ruby script with optional args
+# Used to get the correct ruby env for Monit and others
+
+USER=<%= @runner_name %>
+APP_PATH=<%= @app_home %>
+PATH=/home/$USER/.rbenv/bin:/home/$USER/.rbenv/shims:$PATH
+RAILS_ENV=<%= @envs.first %>
+
+cd $APP_PATH
+RAILS_ENV=$RAILS_ENV bundle exec $@

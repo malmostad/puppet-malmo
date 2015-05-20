@@ -8,20 +8,21 @@ set eventqueue
     basedir /var/lib/monit/events
     slots 100
 
-# set mailserver smtp.example.org
-#     using tlsv1
+# set mailserver relay.example.org
 #     with timeout 30 seconds
 
-set alert root@localhost
+# See https://mmonit.com/monit/documentation/#ALERT-MESSAGES for types
+# set alert alert@example.org only on { resource, nonexist, timeout }
 
+# Needs to be on to run `sudo monit status`
 set httpd port 2812
     use address localhost
     allow localhost
     allow admin:<%= SecureRandom.hex(rand(12..24)) %>
 
-check system <%= @fqdn -%>
-  if loadavg(5min) > 2 for 2 cycles then alert
-  if memory > 75% for 2 cycles then alert
-  if cpu(user) > 75% for 2 cycles then alert
+# check system <%= @fqdn -%>
+#  if loadavg(5min) > 2 for 2 cycles then alert
+#  if memory > 75% for 2 cycles then alert
+#  if cpu(user) > 75% for 2 cycles then alert
 
 include /etc/monit/conf.d/*

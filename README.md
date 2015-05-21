@@ -2,7 +2,7 @@
 
 `malmo-mcommons` is an opinionated [Puppet](https://puppetlabs.com/) module that contains common configurations we use for provisioning of servers and [Vagrants](https://www.vagrantup.com/). Puppet is used in standalone mode without a master. Ubuntu 14.04 is the target system.
 
-The exact selection of system components to install for a specific application is defined in the applications `puppet/server.pp` and `puppet/vagrant.pp` files. See e.g. the [Sitesearch](https://github.com/malmostad/sitesearch) and [wp-apps](https://github.com/malmostad/wp-apps) repos.
+The exact selection of system components to install for a specific application is defined in the applications `puppet/server.pp` and `puppet/vagrant.pp` files. See e.g. the [Sitesearch](https://github.com/malmostad/sitesearch), [Intranet Dashboard](https://github.com/malmostad/intranet-dashboard) and [wp-apps](https://github.com/malmostad/wp-apps) repos.
 
 Each repo that are using `mcommons` have the instructions you need to run the provisioning tool.
 

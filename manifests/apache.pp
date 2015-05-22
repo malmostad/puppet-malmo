@@ -75,6 +75,13 @@ opcache.max_accelerated_files=${opcache_files}
     headers        => ['Set X-UA-Compatible "IE=Edge,chrome=1"'],
     override       => 'All',
     rewrites       => $rewrites,
+    options        => ['-Indexes', '+FollowSymLinks'],
+    # error_documents => [
+    #   { 'error_code' => '500', 'document' => "${::doc_root}/50x.html" },
+    #   { 'error_code' => '501', 'document' => "${::doc_root}/50x.html" },
+    #   { 'error_code' => '503', 'document' => "${::doc_root}/50x.html" },
+    #   { 'error_code' => '404', 'document' => "${::doc_root}/404.html" },
+    # ],
   }
 
   if $ssl {
@@ -88,15 +95,22 @@ opcache.max_accelerated_files=${opcache_files}
     ::apache::vhost { "${::app_name}-ssl":
       servername     => $::fqdn,
       port           => $ssl_port,
-      docroot        => $::app_home,
+      docroot        => $::doc_root,
       docroot_owner  => $::runner_name,
       docroot_group  => $::runner_group,
       directoryindex => $directory_index,
       headers        => ['Set X-UA-Compatible "IE=Edge,chrome=1"'],
       override       => 'All',
+      options        => ['-Indexes', '+FollowSymLinks'],
       ssl            => true,
       ssl_cert       => "/etc/ssl/certs/${cert_base_name}.crt",
       ssl_key        => "/etc/ssl/private/${cert_base_name}.key",
+      # error_documents => [
+      #   { 'error_code' => '500', 'document' => "${::doc_root}/50x.html" },
+      #   { 'error_code' => '501', 'document' => "${::doc_root}/50x.html" },
+      #   { 'error_code' => '503', 'document' => "${::doc_root}/50x.html" },
+      #   { 'error_code' => '404', 'document' => "${::doc_root}/404.html" },
+      # ],
     }
   }
 }

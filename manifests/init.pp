@@ -30,6 +30,13 @@ class mcommons(
     restrict => ['127.0.0.1'],
   }
 
+  include nodejs
+
+  -> package { 'bower':
+    ensure   => 'present',
+    provider => 'npm',
+  }
+
   exec { "Create ${::app_home}":
     command => "/bin/mkdir -p ${::app_home}",
     user    => $::runner_name,

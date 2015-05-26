@@ -30,11 +30,14 @@ class mcommons(
     restrict => ['127.0.0.1'],
   }
 
-  include nodejs
+  if $runner_name == 'vagrant' {
+    # Needed to update shared_assets
+    class { '::nodejs': }
 
-  -> package { 'bower':
-    ensure   => 'present',
-    provider => 'npm',
+    -> package { 'bower':
+      ensure   => 'present',
+      provider => 'npm',
+    }
   }
 
   exec { "Create ${::app_home}":

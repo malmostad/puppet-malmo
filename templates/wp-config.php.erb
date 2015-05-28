@@ -14,6 +14,8 @@
   base_url = "#{protocol}//#{@fqdn}#{specified_port}/"
 %>
 
+putenv('LDAPTLS_REQCERT=never');
+
 define('WP_SITEURL', '<%= base_url %>');
 define('WP_HOME',    '<%= base_url %>');
 

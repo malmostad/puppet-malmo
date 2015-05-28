@@ -23,6 +23,8 @@ class mcommons::apache(
   }
 
   if $php {
+    package { 'php5-ldap': } ->
+
     class { '::apache::mod::prefork':
       serverlimit => $serverlimit,
       maxclients  => $maxclients,

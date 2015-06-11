@@ -37,9 +37,13 @@ class mcommons::ruby::rails() {
   }
 
   ::logrotate::rule { $::app_name:
-    path         => "${::runner_home}/${::app_name}/shared/log",
-    rotate       => 52,
-    rotate_every => 'week',
+    path          => "${::runner_home}/${::app_name}/shared/log/*.log",
+    rotate        => 52,
+    rotate_every  => 'week',
+    missingok     => true,
+    compress      => true,
+    delaycompress => true,
+    copytruncate  => true,
   }
 
   # file { "app":

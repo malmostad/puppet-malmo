@@ -1,6 +1,6 @@
 {
   "name": "malmo-mcommons",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "author": "Malmo stad",
   "summary": "Puppet module containing common configurations for server and Vagrant provisioning",
   "license": "AGPL v3",

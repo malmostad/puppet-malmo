@@ -1,5 +1,5 @@
 class mcommons::ruby(
-  $version = '2.2.1'
+  $version = '2.2.3'
 ) {
   require ::mcommons
 

@@ -1,5 +1,5 @@
 class mcommons::elasticsearch(
-  $version = '1.4',
+  $version = '1.7',
   $memory  = '512m'
 ) {
   require ::mcommons

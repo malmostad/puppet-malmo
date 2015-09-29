@@ -22,8 +22,12 @@ class mcommons::elasticsearch(
   }
 
   ::logrotate::rule { 'elasticsearch':
-    path         => '/var/log/elasticsearch/es-01',
-    rotate       => 52,
-    rotate_every => 'week',
+    path          => '/var/log/elasticsearch/es-01',
+    rotate        => 52,
+    rotate_every  => 'week',
+    missingok     => true,
+    compress      => true,
+    delaycompress => true,
+    ifempty       => false,
   }
 }

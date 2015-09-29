@@ -44,6 +44,14 @@ class mcommons::ruby::rails() {
     compress      => true,
     delaycompress => true,
     copytruncate  => true,
+    ifempty       => false,
+    su            => true,
+    su_owner      => $::runner_name,
+    su_group      => $::runner_group,
+    create        => true,
+    create_owner  => $::runner_name,
+    create_group  => $::runner_group,
+    create_mode   => '0640',
   }
 
   # file { "app":

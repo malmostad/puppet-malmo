@@ -3,13 +3,14 @@ class mcommons::apache(
   $force_ssl      = true,
   $port           = 80,
   $ssl_port       = 443,
-  $serverlimit    = 512,
-  $maxclients     = 512,
+  $serverlimit    = 500,
+  $maxclients     = 500,
   $snakeoil       = false,
   $php            = false,
   $opcache        = 'On',
   $opcache_memory = 128,
   $opcache_files  = 4000,
+  $directories    = [ {} ],
 ) {
   require ::mcommons
 
@@ -78,6 +79,7 @@ opcache.max_accelerated_files=${opcache_files}
     override       => 'All',
     rewrites       => $rewrites,
     options        => ['-Indexes', '+FollowSymLinks'],
+    directories    => $directories,
     # error_documents => [
     #   { 'error_code' => '500', 'document' => "${::doc_root}/50x.html" },
     #   { 'error_code' => '501', 'document' => "${::doc_root}/50x.html" },
@@ -107,6 +109,7 @@ opcache.max_accelerated_files=${opcache_files}
       ssl            => true,
       ssl_cert       => "/etc/ssl/certs/${cert_base_name}.crt",
       ssl_key        => "/etc/ssl/private/${cert_base_name}.key",
+      directories   => $directories,
       # error_documents => [
       #   { 'error_code' => '500', 'document' => "${::doc_root}/50x.html" },
       #   { 'error_code' => '501', 'document' => "${::doc_root}/50x.html" },

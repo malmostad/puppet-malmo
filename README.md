@@ -1,4 +1,4 @@
-# mcommons
+# Puppet mcommons
 
 `malmo-mcommons` is an opinionated [Puppet](https://puppetlabs.com/) module that contains common configurations we use for provisioning of servers and [Vagrants](https://www.vagrantup.com/). Puppet is used in standalone mode without a master. Ubuntu 14.04 is the target system.
 

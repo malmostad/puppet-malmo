@@ -30,12 +30,12 @@ class mcommons(
     restrict => ['127.0.0.1'],
   }
 
-  class { '::nodejs': }
-
-  -> package { 'bower':
-    ensure   => 'present',
-    provider => 'npm',
-  }
+  # class { '::nodejs': }
+  #
+  # -> package { 'bower':
+  #   ensure   => 'present',
+  #   provider => 'npm',
+  # }
 
   exec { "Create ${::app_home}":
     command => "/bin/mkdir -p ${::app_home}",

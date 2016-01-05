@@ -5,6 +5,7 @@ class mcommons::elasticsearch(
   require ::mcommons
 
   class { '::elasticsearch':
+    status       => 'enabled',
     manage_repo  => true,
     repo_version => $version,
     java_install => true,

@@ -40,8 +40,8 @@ server {
     proxy_pass http://unicorn;
   }
 
-  error_page 404 /404.html;
-  error_page 408 /408.html;
-  error_page 500 502 504 /500.html;
-  error_page 503 /503.html;
+  error_page 404 501 /404.html;
+  error_page 408 504 /408.html;
+  error_page 500     /500.html;
+  error_page 502 503 /503.html;
 }

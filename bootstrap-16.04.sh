@@ -35,9 +35,15 @@ apt-get install -y puppet >/dev/null
 # Adapt Puppet to it's own requirements ...
 touch /etc/puppet/hiera.yaml >/dev/null
 
-echo "Installing internal Puppet module"
-cd /vagrant/puppet
-tar -czf base.tar.gz base
-puppet module install base.tar.gz
-rm base.tar.gz >/dev/null
-cd ..
+echo "Installing malmo-mcommons Puppet module"
+wget https://github.com/malmostad/puppet-mcommons/archive/master.tar.gz -O malmo-mcommons.tar.gz 2>/dev/null
+puppet module install malmo-mcommons.tar.gz
+rm malmo-mcommons.tar.gz >/dev/null
+
+# Vagrant uses vagrant.pp for Puppet provisioning
+# We use server.pp if we are not in a Vagrant box
+if ! [ -e "/vagrant" ]
+then
+  echo "Starting Puppet provisioning defined in server.pp"
+  puppet apply server.pp
+fi

@@ -23,15 +23,15 @@ class mcommons::apache(
   }
 
   if $php {
-    package { 'php7-ldap': } ->
-
+    package { 'php7.0-ldap': } ->
+    package { 'libapache2-mod-php7.0': } ->
     class { '::apache::mod::prefork':
       serverlimit => $serverlimit,
       maxclients  => $maxclients,
     } ->
     class { '::apache::mod::php': } ->
 
-    file { '/etc/php7/mods-available/opcache.ini':
+    file { '/etc/php/7.0/mods-available/opcache.ini':
       replace => true,
       content => "; Puppet generated
 zend_extension=opcache.so

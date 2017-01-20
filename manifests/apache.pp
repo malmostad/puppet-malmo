@@ -24,7 +24,9 @@ class mcommons::apache(
 
   if $php {
     package { 'php7.0-ldap': } ->
+    package { 'php7.0-gd': } ->
     package { 'libapache2-mod-php7.0': } ->
+
     class { '::apache::mod::prefork':
       serverlimit => $serverlimit,
       maxclients  => $maxclients,

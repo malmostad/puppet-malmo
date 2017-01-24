@@ -25,6 +25,6 @@
     { "name": "rodjek/logrotate", "version_requirement": "1.x" },
     { "name": "puppetlabs/apache", "version_requirement": "1.x" },
     { "name": "puppetlabs/ntp", "version_requirement": "3.x" },
-    { "name": "voxpupuli/puppet-nodejs", "version_requirement": "2.x" }
+    { "name": "puppet-nodejs", "version_requirement": "2.x" }
   ]
 }

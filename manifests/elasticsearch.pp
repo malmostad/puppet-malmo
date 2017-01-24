@@ -12,10 +12,11 @@ class mcommons::elasticsearch(
     config       => {
       'network.host' => '127.0.0.1',
     },
-    jvm_options  => [
-      "-Xms${memory}",
-      "-Xmx${memory}",
-    ],
+    # Only supported in master
+    # jvm_options  => [
+    #   "-Xms${memory}",
+    #   "-Xmx${memory}",
+    # ],
   } ->
 
   ::elasticsearch::instance { 'es-01': } ->

@@ -13,9 +13,9 @@ class mcommons::elasticsearch(
       'network.host' => '127.0.0.1',
     },
     jvm_options  => [
-      '-Xms{$memory}',
-      '-Xmx{$memory}'
-    ]
+      "-Xms${memory}",
+      "-Xmx${memory}",
+    ],
   } ->
 
   ::elasticsearch::instance { 'es-01': } ->

@@ -1,6 +1,6 @@
 class mcommons::elasticsearch(
-  $version = '1.7',
-  $memory  = '512m'
+  $version = '5.x',
+  $memory  = '2g'
 ) {
   require ::mcommons
 
@@ -12,15 +12,13 @@ class mcommons::elasticsearch(
     config       => {
       'network.host' => '127.0.0.1',
     },
+    jvm_options  => [
+      '-Xms{$memory}',
+      '-Xmx{$memory}'
+    ]
   } ->
 
   ::elasticsearch::instance { 'es-01': } ->
-
-  file_line { 'Set heap size for ElasticSearch':
-    path  => '/etc/init.d/elasticsearch-es-01',
-    line  => "ES_HEAP_SIZE=${memory}",
-    match => 'ES_HEAP_SIZE\s*=',
-  }
 
   ::logrotate::rule { 'elasticsearch':
     path          => '/var/log/elasticsearch/es-01',

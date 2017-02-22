@@ -1,8 +1,8 @@
 # Puppet mcommons
 
-`malmo-mcommons` is an opinionated [Puppet](https://puppetlabs.com/) module that contains common configurations we use for provisioning of servers and [Vagrants](https://www.vagrantup.com/). Puppet is used in standalone mode without a master. Ubuntu 14.04 is the target system.
+`malmo-mcommons` is an opinionated [Puppet](https://puppetlabs.com/) module that contains common configurations we use for provisioning of servers and [Vagrants](https://www.vagrantup.com/). Puppet is used in standalone mode without a master. Ubuntu 16.04 is the target system.
 
-`Note:` Use the ubuntu-1604 branch for setting up Ubuntu 16.04 Vagrants and servers. This will be the master branch soon.
+`Note:` Use the ubuntu-1404 branch for setting up Ubuntu 14.04 Vagrants and servers.
 
 The exact selection of system components to install for a specific application is defined in the applications `puppet/server.pp` and `puppet/vagrant.pp` files. See e.g. the [Sitesearch](https://github.com/malmostad/sitesearch), [Intranet Dashboard](https://github.com/malmostad/intranet-dashboard) and [wp-apps](https://github.com/malmostad/wp-apps) repos.
 

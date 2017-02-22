@@ -63,6 +63,8 @@ class mcommons::ruby::rails() {
   #   content => template('mcommons/rails/app_config.erb'),
   # }
 
+  class { '::nodejs': }
+
   file_line { 'Please edit the apps config file':
     path => $mcommons::install_info,
     line => "Please edit the apps config file: ${::app_home}/config/app_config.yml",

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Bootstraps Puppet on Ubuntu 14.04
+# Bootstraps Puppet on Ubuntu 16.04
 #
 set -e
 
@@ -13,33 +13,30 @@ locale-gen en_US.UTF-8 >/dev/null
 # Load up the release information
 . /etc/lsb-release
 
-REPO_DEB_URL="http://apt.puppetlabs.com/puppetlabs-release-${DISTRIB_CODENAME}.deb"
+DEB_FILE="puppetlabs-release-pc1-${DISTRIB_CODENAME}.deb"
 
 if [ "$(id -u)" != "0" ]; then
   echo "This script must be run as root." >&2
   exit 1
 fi
 
-echo "Initial apt-get update ..."
-apt-get update >/dev/null
-
 # Install the PuppetLabs repo
 echo "Configuring PuppetLabs repo..."
-repo_deb_path=$(mktemp)
-wget --output-document="${repo_deb_path}" "${REPO_DEB_URL}" 2>/dev/null
-dpkg -i "${repo_deb_path}" >/dev/null
+wget http://apt.puppetlabs.com/${DEB_FILE} >/dev/null 2>&1
+dpkg -i ${DEB_FILE}
+rm ${DEB_FILE}
 apt-get update >/dev/null
 
 # Install Puppet
-echo -e "\nNotice: Warnings from Puppet are expected\n"
 echo "Installing Puppet..."
-DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install puppet >/dev/null
+apt-get install -y puppet >/dev/null
+# puppet resource package puppet ensure=latest
 
 # Adapt Puppet to it's own requirements ...
 touch /etc/puppet/hiera.yaml >/dev/null
 
 echo "Installing malmo-mcommons Puppet module"
-wget https://github.com/malmostad/puppet-mcommons/archive/master.tar.gz -O malmo-mcommons.tar.gz 2>/dev/null
+wget https://github.com/malmostad/puppet-mcommons/archive/ubuntu-1604.tar.gz -O malmo-mcommons.tar.gz 2>/dev/null
 puppet module install malmo-mcommons.tar.gz
 rm malmo-mcommons.tar.gz >/dev/null
 

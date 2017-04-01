@@ -23,7 +23,9 @@ class mcommons::apache(
   }
 
   if $php {
-    package { 'php5-ldap': } ->
+    package { 'php7.0-ldap': } ->
+    package { 'php7.0-gd': } ->
+    package { 'libapache2-mod-php7.0': } ->
 
     class { '::apache::mod::prefork':
       serverlimit => $serverlimit,
@@ -31,7 +33,7 @@ class mcommons::apache(
     } ->
     class { '::apache::mod::php': } ->
 
-    file { '/etc/php5/mods-available/opcache.ini':
+    file { '/etc/php/7.0/mods-available/opcache.ini':
       replace => true,
       content => "; Puppet generated
 zend_extension=opcache.so
@@ -74,7 +76,7 @@ opcache.max_accelerated_files=${opcache_files}
     docroot_group  => $::runner_group,
     port           => $port,
     directoryindex => $directory_index,
-    headers        => ['Set X-UA-Compatible "IE=Edge,chrome=1"'],
+    headers        => ['Set X-UA-Compatible "IE=Edge"'],
     override       => 'All',
     rewrites       => $rewrites,
     options        => ['-Indexes', '+FollowSymLinks'],
@@ -101,7 +103,7 @@ opcache.max_accelerated_files=${opcache_files}
       docroot_owner  => $::runner_name,
       docroot_group  => $::runner_group,
       directoryindex => $directory_index,
-      headers        => ['Set X-UA-Compatible "IE=Edge,chrome=1"'],
+      headers        => ['Set X-UA-Compatible "IE=Edge"'],
       override       => 'All',
       options        => ['-Indexes', '+FollowSymLinks'],
       ssl            => true,

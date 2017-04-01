@@ -1,6 +1,6 @@
 {
   "name": "malmo-mcommons",
-  "version": "0.0.24",
+  "version": "0.0.26",
   "author": "Malmo stad",
   "summary": "Puppet module containing common configurations for server and Vagrant provisioning",
   "license": "AGPL v3",
@@ -10,7 +10,7 @@
   "operatingsystem_support": [
     {
     "operatingsystem": "Ubuntu",
-    "operatingsystemrelease": [ "14.04" ]
+    "operatingsystemrelease": [ "16.04" ]
     }
    ],
   "dependencies": [
@@ -20,11 +20,11 @@
     { "name": "saz/memcached", "version_requirement": "2.x" },
     { "name": "puppetlabs/mysql", "version_requirement": "3.x" },
     { "name": "puppetlabs/java", "version_requirement": "1.x" },
-    { "name": "puppetlabs/apt", "version_requirement": "1.x" },
-    { "name": "elasticsearch/elasticsearch", "version_requirement": ">=0.9.2 <1.0.0" },
+    { "name": "puppetlabs/apt", "version_requirement": "2.x" },
+    { "name": "elasticsearch/elasticsearch", "version_requirement": ">=0.15.1 <1.0.0" },
     { "name": "rodjek/logrotate", "version_requirement": "1.x" },
     { "name": "puppetlabs/apache", "version_requirement": "1.x" },
     { "name": "puppetlabs/ntp", "version_requirement": "3.x" },
-    { "name": "puppetlabs/nodejs", "version_requirement": ">=0.8.0 <1.0.0" }
+    { "name": "puppet-nodejs", "version_requirement": "2.x" }
   ]
 }

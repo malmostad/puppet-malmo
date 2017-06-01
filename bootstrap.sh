@@ -36,7 +36,7 @@ apt-get install -y puppet >/dev/null
 touch /etc/puppet/hiera.yaml >/dev/null
 
 echo "Installing malmo-mcommons Puppet module"
-wget https://github.com/malmostad/puppet-mcommons/archive/ubuntu-1604.tar.gz -O malmo-mcommons.tar.gz 2>/dev/null
+wget wget https://github.com/martent/puppet-mcommons/archive/master.tar.gz -O malmo-mcommons.tar.gz 2>/dev/null
 puppet module install malmo-mcommons.tar.gz
 rm malmo-mcommons.tar.gz >/dev/null
 

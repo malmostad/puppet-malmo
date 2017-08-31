@@ -1,6 +1,6 @@
 {
   "name": "malmo-mcommons",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "author": "Malmo stad",
   "summary": "Puppet module containing common configurations for server and Vagrant provisioning",
   "license": "AGPL v3",
@@ -21,7 +21,7 @@
     { "name": "puppetlabs/mysql", "version_requirement": "3.x" },
     { "name": "puppetlabs/java", "version_requirement": "1.x" },
     { "name": "puppetlabs/apt", "version_requirement": "2.x" },
-    { "name": "elasticsearch/elasticsearch", "version_requirement": ">=0.15.1 <1.0.0" },
+    { "name": "elastic/elasticsearch", "version_requirement": "5.4.2" },
     { "name": "rodjek/logrotate", "version_requirement": "1.x" },
     { "name": "puppetlabs/apache", "version_requirement": "1.x" },
     { "name": "puppetlabs/ntp", "version_requirement": "3.x" },
